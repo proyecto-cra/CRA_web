@@ -1,19 +1,21 @@
 <?php
+
 	include "librerias/conexion.php";
 	include "Clases/Libro.php";
 
 	$libros = array();
 
-	$sql = "SELECT id, titulo, autor, resumen, copias  FROM libros";
+	$sql = "SELECT id, titulo, autor, resumen, copias, imagen  FROM libros";
 	$listar = mysqli_query($cn, $sql);
 
-	while ($rs = mysqli_fetch_array($listar)) {
+	while ($rs = mysqli_fetch_assoc($listar)) {
 
 		$id = $rs["id"];
 		$titulo = $rs["titulo"];
 		$autor = $rs["autor"];
 		$resumen = $rs["resumen"];
 		$copias = $rs["copias"];
+		$img = $rs["imagen"];
 
 		$libro = new Libro($id, $titulo, $autor, $resumen, $copias);
 
@@ -31,7 +33,7 @@
 		
 		?>
 			<div class="card" >
-				<img src="img/img1.png" alt="Card image cap" style=" padding: 5px;">
+				<img src="verblob.php?id=1" alt="Imagen desde blob">
 				<div class="card-body">
 					<h5 class="card-title"style="font-weight: bold;"><?php echo $libros[$i]->getTitulo(); ?></h5>
 					<h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold;"><?php echo $libros[$i]->getAutor(); ?></h6>
