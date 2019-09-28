@@ -1,3 +1,18 @@
+ul {
+	list-style: none;
+}
+
+ul li a {
+	color: yellow;
+	text-decoration: none;
+	font-size: xx-large;
+}
+
+ul li a:hover {
+	color: white;
+	text-decoration: none;
+	font-size: xx-large;
+}
 
 .list{
   margin-top: 20px;

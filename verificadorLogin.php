@@ -10,7 +10,7 @@
     // Si el input de login.php es presionado
 	if ($_POST["btnEnviar"] && $rut != "" && $contra != "") {
 
-		$sql = "SELECT id, rut, contrasena FROM usuarios WHERE rut = $rut AND contrasena = $contra";
+		$sql = "SELECT id, rut, cargo FROM usuarios WHERE rut = $rut AND contrasena = $contra";
 
 		$listar = mysqli_query($cn, $sql);
 
@@ -22,7 +22,7 @@
 
 		    	$_SESSION["id"] = $rs["id"];
 		    	$_SESSION["rut"] = $rs["rut"];
-		    	$_SESSION["contra"] = $rs["contrasena"];
+		    	$_SESSION["cargo"] = $rs["cargo"];
 
 		    	header('location:libros.php');
 

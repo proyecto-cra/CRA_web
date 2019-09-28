@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,12 @@
 				</li>
 				<li class="nav-item active">
 					<a class="nav-link" href="ajustes.php">Ajustes<span class="sr-only">(current)</span></a>
+				</li>
+				<?php if ($_SESSION['cargo'] == 1 || $_SESSION['cargo'] == 2): ?>
+				<li class="nav-item active">
+					<a class="nav-link" href="informes.html">Informes<span class="sr-only">(current)</span></a>
+				</li>
+				<?php endif ?>
 			</ul>
 			<span class="navbar-text" style="font-size: 50%;">
 				<em> No dejes para mañana lo que puedes leer hoy</em>
