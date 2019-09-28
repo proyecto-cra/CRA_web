@@ -95,7 +95,7 @@
 
   <center> 
   <input type="submit" name="btnEnviarPedido" value="Obtener mi código" class="btn"><br><br>
-  <button class="btn"><a href="libros.php" style= "color: #00091e;"> Volver atrás.</a></button><br><br>
+  <button class="btn"><a href="libros2.php" style= "color: #00091e;"> Volver atrás.</a></button><br><br>
   </div>
 </form>
 

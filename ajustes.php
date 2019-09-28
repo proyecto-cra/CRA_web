@@ -1,7 +1,11 @@
+<?php
+  include( "librerias/conexion.php");
+  session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ajustes</title>
+    <title>Ajustes</title>
 	<link rel="stylesheet" type="text/css" href="estilo.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -35,12 +39,90 @@
 			</span>
 		</div>
 	</nav>
-<nav>
-	
-</nav>
+<?php
 
+    if (isset($_SESSION["id"])){
+        $id= $_SESSION["id"];
+        $listar=mysqli_query($cn, "SELECT * FROM usuarios WHERE id='$id'");
+        while ($rs=mysqli_fetch_assoc($listar)){
+            $nombre = $rs["nombre"];
+            $apellido = $rs["apellido"];
+            $fecha_nacimiento = $rs["fecha_nacimiento"];
+            $telefono = $rs["telefono"];
+            $contrasena = $rs["contrasena"];
 
+        }
+        
+    }
+?>
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-tittle">Editar mi Perfil</h3>
+                        </div>
+                    <form role="form" method="post" action="#" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="ejemploinput">Nombre
+                                </label>
+                                <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="<?php echo $nombre;?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="ejemploinput">Apellido
+                                </label>
+                                <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="<?php echo $apellido;?>">
+                            </div>               
+                            <div class="form-group">
+                                <label for="ejemploinput">Fecha de nacimiento
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                <input type="text" name="nacimiento" placeholder="<?php echo $fecha_nacimiento;?>" class="form-control" data-inputmask="allas:'yyyy-mm-dd' data-mask">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ejemploinput">Teléfono
+                                </label>
+                                <input type="text" name="telefono" class="form-control" placeholder="telefono" value="<?php echo $telefono;?>">
+                            </div>       
+                            <div class="form-group">
+                                <label for="ejemploinput">Contraseña
+                                </label>
+                                <input type="text" name="contrasena" class="form-control" placeholder="contraseña" value="<?php echo $contrasena;?>">
+                            </div> 
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" name="Actualizar" class="btn btn-primary">Actualizar datos</button>
+                        </div>
+                    </form>
+                    </div>
+                <?php
 
+                    print_r($_POST);
+                    if(isset($_POST['Actualizar'])){
+                        $nombre=mysqli_real_escape_string($cn, $_POST['nombre']);
+                         $apellido=mysqli_real_escape_string($cn, $_POST['apellido']);
+                         $telefono=mysqli_real_escape_string($cn, $_POST['telefono']);
+                         $contrasena=mysqli_real_escape_string($cn, $_POST['contrasena']);
+                    }
+                    $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellido',telefono='$telefono', contrasena='$contrasena' WHERE  id='$id'";
+                    $sql=mysqli_query($cn, $sql);
+                        
+                ?>
+                </div>
+                
+            </div>
+        
+        </section>
+    
+    </div>
+
+    <br>
 
 
 	<footer class="page-footer font-small pt-4" style="color: #7daae6; background-color: #00091e; font-family: simplicity; font-size: 130%;">
