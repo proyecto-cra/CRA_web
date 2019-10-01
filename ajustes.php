@@ -30,6 +30,9 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
 				</li>
+               <li class="nav-item active">
+                  <a class="nav-link" href="libros.php">Volver <span class="sr-only">(current)</span></a>
+               </li>
 				<li class="nav-item active">
 					<a class="nav-link" href="cerrarSesion.php">Cerrar Sesion <span class="sr-only">(current)</span></a>
 				</li>
@@ -75,16 +78,6 @@
                                 </label>
                                 <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="<?php echo $apellido;?>">
                             </div>               
-                            <div class="form-group">
-                                <label for="ejemploinput">Fecha de nacimiento
-                                </label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                <input type="text" name="nacimiento" placeholder="<?php echo $fecha_nacimiento;?>" class="form-control" data-inputmask="allas:'yyyy-mm-dd' data-mask">
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="ejemploinput">Teléfono
                                 </label>
