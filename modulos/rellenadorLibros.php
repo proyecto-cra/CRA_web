@@ -17,7 +17,7 @@
 		$copias = $rs["copias"];
 		$img = $rs["imagen"];
 
-		$libro = new Libro($id, $titulo, $autor, $resumen, $copias);
+		$libro = new Libro($id, $titulo, $autor, $resumen, $copias, $img);
 
 		array_push($libros, $libro);
 	}
@@ -33,7 +33,7 @@
 		
 		?>
 			<div class="card" >
-				<img src="verblob.php?id=1" alt="Imagen desde blob">
+				<?php echo "<img src='data:image/jpeg; base64," . base64_encode($libros[$i]->getImagen()) . "' class='card-img-top' >"; ?>
 				<div class="card-body">
 					<h5 class="card-title"style="font-weight: bold;"><?php echo $libros[$i]->getTitulo(); ?></h5>
 					<h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold;"><?php echo $libros[$i]->getAutor(); ?></h6>

@@ -2,6 +2,10 @@ ul {
 	list-style: none;
 }
 
+img {
+	height: 316px;
+}
+
 ul li a {
 	color: yellow;
 	text-decoration: none;

@@ -7,14 +7,16 @@
 		public $autor;
 		public $resumen;
 		public $copias;
+		public $imagen;
 
 		//Constructor
-		public function Libro (int $id, string $titulo, string $autor, string $resumen, int $copias) {
+		public function Libro (int $id, string $titulo, string $autor, string $resumen, int $copias, $imagen) {
 			$this->id = $id;
 			$this->titulo = $titulo;
 			$this->autor = $autor;
 			$this->resumen = $resumen;
 			$this->copias = $copias;
+			$this->imagen = $imagen;
 		}
 
 		public function setId(int $id) {
@@ -55,6 +57,10 @@
 
 		public function getCopias(){
 			return $this->copias;
+		}
+
+		public function getImagen(){
+			return $this->imagen;
 		}
  
    }
