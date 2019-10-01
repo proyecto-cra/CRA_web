@@ -33,7 +33,7 @@
 		
 		?>
 			<div class="card" >
-				<?php echo "<img src='data:image/jpeg; base64," . base64_encode($libros[$i]->getImagen()) . "' class='card-img-top' >"; ?>
+				<?php echo "<img src='data:image/jpeg; base64," . base64_encode($libros[$i]->getImagen()) . "' id='imagenCarta' class='card-img-top' >"; ?>
 				<div class="card-body">
 					<h5 class="card-title"style="font-weight: bold;"><?php echo $libros[$i]->getTitulo(); ?></h5>
 					<h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold;"><?php echo $libros[$i]->getAutor(); ?></h6>
