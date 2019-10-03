@@ -1,3 +1,6 @@
+<?php 
+  session_start();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,9 +28,16 @@
       <li class="nav-item active">
         <a class="nav-link" targer="_self" href="login.php">Iniciar sesión<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" targer="_self" href="Libros2.php">Libros</a>
-      </li>
+      <?php if (isset($_SESSION["rut"]) == ""): ?>
+        <li class="nav-item active">
+          <a class="nav-link" targer="_self" href="libros2.php">Libros</a>
+        </li>
+      <?php endif ?>
+      <?php if (isset($_SESSION["rut"]) != ""): ?>
+        <li class="nav-item active">
+          <a class="nav-link" targer="_self" href="libros.php">Libros</a>
+        </li>
+      <?php endif ?>
  
     </ul>
     <span class="navbar-text" style="font-size: 50%;">

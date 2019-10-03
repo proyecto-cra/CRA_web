@@ -25,22 +25,22 @@
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
 					<a class="nav-link" href="cerrarSesion.php">Cerrar Sesion <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="ajustes.php">Ajustes<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="ajustes.php?e=1">Ajustes<span class="sr-only">(current)</span></a>
 				</li>
-				<?php if ($_SESSION['cargo'] == 1 || $_SESSION['cargo'] == 2): ?>
+				<?php if (isset($_SESSION['cargo']) == 1 || isset($_SESSION['cargo']) == 2): ?>
 				<li class="nav-item active">
 					<a class="nav-link" href="informes.html">Informes<span class="sr-only">(current)</span></a>
 				</li>
 				<?php endif ?>
 			</ul>
 			<span class="navbar-text" style="font-size: 50%;">
-				<em> No dejes para mañana lo que puedes leer hoy</em>
+				<em><?php echo "Bienvenid@ " . $_SESSION["nombre"]; ?></em>
 			</span>
 		</div>
 	</nav>

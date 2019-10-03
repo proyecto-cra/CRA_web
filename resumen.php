@@ -1,3 +1,24 @@
+<?php
+  
+  session_start();
+
+  $idLibro = $_GET["idLibro"];
+
+  include 'librerias/conexion.php';
+
+  $sql = "SELECT libros.titulo, libros.imagen, libros.resumen, tiempo_lectura.comando FROM libros, tiempo_lectura WHERE (tiempo_lectura.id = libros.tiempo_lectura) AND (libros.id = " . $idLibro . ");";
+  $listar = mysqli_query($cn, $sql);
+  while ($rs = mysqli_fetch_assoc($listar)) {
+
+    $titulo = $rs["titulo"];
+    $img = $rs["imagen"];
+    $resumen = $rs["resumen"];
+    $tl = $rs["comando"];
+
+  }
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,12 +47,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="Pedir.php">Pedir Libro</a>
-      </li>
+      
     </ul>
     <span class="navbar-text" style="font-size: 50%;">
      <em> No dejes para mañana lo que puedes leer hoy</em>
@@ -46,28 +62,32 @@
 <table border="">
   <tr>
 <td>
-<img src="img/img2.png" style="  margin-top: 1px; padding: 1.5%;">
+<img src="<?php echo "data:image/jpeg; base64," . base64_encode($img); ?>" style="  margin-top: 1px; padding: 1.5%;">
 </td> 
     <td>
       <center>
-    <h1>SINOPSIS</h1>
+    <h1><?php echo $titulo; ?></h1>
         
       </center>
-  <h5><br><b>En este libro, un aviador —Saint-Exupéry lo fue— se encuentra perdido en el desierto del Sahara, después de haber tenido una avería en su avión. Entonces aparece un pequeño príncipe. En sus conversaciones con él, el narrador revela su propia visión sobre la estupidez humana y la sencilla sabiduría de los niños que la mayoría de las personas pierden cuando crecen y se hacen adultos.<br>
-       
-
-El relato viene acompañado por ilustraciones dibujadas por el autor.
-
-El principito vive en un pequeño planeta, el asteroide B 612, en el que hay tres volcanes (dos de ellos activos y uno no) y una rosa. Pasa sus días cuidando de su planeta, y quitando los árboles baobab que constantemente intentan echar raíces allí. De permitirles crecer, los árboles partirían su planeta en pedazos.<br>
-
-Un día decide abandonar su planeta, quizás cansado de los reproches y reclamos de la rosa, para explorar otros mundos. Aprovecha una migración de pájaros para emprender su viaje y recorrer el universo; es así como visita seis planetas, cada uno de ellos habitado por un personaje: un rey, un vanidoso, un borracho, un hombre de negocios, un farolero y un geógrafo, los cuales, a su manera, demuestran lo vacías que se vuelven las personas cuando se transforman en adultas.
-
-El último personaje que conoce, el geógrafo, le recomienda viajar a un planeta específico, la Tierra, donde entre otras experiencias acaba conociendo al aviador que, ya habíamos comentado, estaba perdido en el desierto.</b><br><br>
+  <br><b><?php echo $resumen; ?></b><br><br>
     
     <center>
       
-    <button style="background-color:#00091e; border-color:#00091e; margin:right;"><a href="Pedir.php" style="color:white; "> Pedir Libro </a> </button>
-    <button style="background-color:#7daae6; border-color:#7daae6; margin:right;" ><a href="libros.html" style="color:#00091e;"><strong> Volver</strong> </a>
+    <button style="background-color:#00091e; border-color:#00091e; margin:right;">
+      <a href="Pedir.php?<?php echo "libro=" . $idLibro . "&tl=" . $tl ;?>" style="color:white; "> Pedir Libro </a> 
+    </button>
+    <button style="background-color:#7daae6; border-color:#7daae6; margin:right;" >
+      <?php if (isset($_SESSION["rut"]) == ""): ?>
+        <a href="libros2.php" style="color:#00091e;">
+          <strong> Volver</strong> 
+        </a>
+      <?php endif ?>
+      <?php if (isset($_SESSION["rut"]) != ""): ?>
+        <a href="libros.php" style="color:#00091e;">
+          <strong> Volver</strong> 
+        </a>
+      <?php endif ?>
+
     </button>
 
     </center>

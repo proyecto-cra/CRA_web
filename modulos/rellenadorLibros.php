@@ -5,7 +5,7 @@
 
 	$libros = array();
 
-	$sql = "SELECT id, titulo, autor, resumen, copias, imagen  FROM libros";
+	$sql = "SELECT libros.id, libros.titulo, libros.autor, libros.resumen, libros.copias, tiempo_lectura.comando, libros.imagen  FROM libros, tiempo_lectura WHERE (tiempo_lectura.id = libros.tiempo_lectura)";
 	$listar = mysqli_query($cn, $sql);
 
 	while ($rs = mysqli_fetch_assoc($listar)) {
@@ -15,9 +15,10 @@
 		$autor = $rs["autor"];
 		$resumen = $rs["resumen"];
 		$copias = $rs["copias"];
+		$tl = $rs["comando"];
 		$img = $rs["imagen"];
 
-		$libro = new Libro($id, $titulo, $autor, $resumen, $copias, $img);
+		$libro = new Libro($id, $titulo, $autor, $resumen, $copias, $tl, $img);
 
 		array_push($libros, $libro);
 	}
@@ -38,8 +39,8 @@
 					<h5 class="card-title"style="font-weight: bold;"><?php echo $libros[$i]->getTitulo(); ?></h5>
 					<h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold;"><?php echo $libros[$i]->getAutor(); ?></h6>
 					<p class="card-text" style="font-size:15px;"><?php echo cortar_string($libros[$i]->getResumen(), 50).'...'; ?></p>
-					<a href="Resumen.html" class="card-link">Ver Resumen</a>
-					<?php echo '<a href="Pedir.php?libro='.$libros[$i]->getId().'" class="card-link">Pedir ('.$libros[$i]->getCopias().')</a>'; ?>
+					<?php echo "<a href='Resumen.php?idLibro=" . $libros[$i]->getId() . "' class='card-link'>Ver Resumen</a>"; ?>
+					<?php echo "<a href='Pedir.php?libro=" . $libros[$i]->getId() . "&tl=" . $libros[$i]->getTiempoLectura() ."' class='card-link'>Pedir (".$libros[$i]->getCopias().")</a>"; ?>
 				</div>
 			</div>
 		<?php

@@ -6,7 +6,7 @@ $pdf->ezSetCmMargins(1,1,1.5,1.5);
 
 $conexion = mysqli_connect("localhost", "root", "");
 mysqli_select_db($conexion,"bdcra");
-$queEmp = "SELECT usuarios.id, usuarios.rut, usuarios.nombre, usuarios.apellido, usuarios.fecha_nacimiento, cargo.tipo_cargo, usuarios.telefono, usuarios.contrasena FROM usuarios INNER JOIN cargo ON usuarios.id = cargo.id";
+$queEmp = "SELECT usuarios.id, usuarios.rut, usuarios.nombre, usuarios.apellido, usuarios.fecha_nacimiento, cargo.tipo_cargo, usuarios.telefono, usuarios.contrasena FROM usuarios, cargo WHERE (cargo.id = usuarios.cargo) ORDER BY usuarios.id ASC";
 $resEmp = mysqli_query($conexion, $queEmp) or die(mysqli_error());
 $totEmp = mysqli_num_rows($resEmp);
 
@@ -17,13 +17,14 @@ while($datatmp = mysqli_fetch_assoc($resEmp)) {
 }
 $titles = array(
 				'num'=>'<b>Num</b>',
+				'id' => 'ID',
 				'rut'=>'<b>RUT</b>',
 				'nombre'=>'<b>NOMBRE</b>',
 				'apellido'=>'<b>APELLIDO</b>',
 				'fecha_nacimiento'=>'<b>FECHA_NAC</b>',
 				'tipo_cargo'=>'<b>CARGO</b>',
 				'telefono'=>'<b>TELEFONO</b>',
-				'contrasena'=>'<b>CONTRASENIA</b>',
+				'contrasena'=>'<b>CONTRASENIA</b>'
 				);
 $options = array(
 				'shadeCol'=>array(0.9,0.9,0.9),

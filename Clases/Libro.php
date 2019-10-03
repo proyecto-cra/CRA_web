@@ -2,61 +2,49 @@
 
 	class Libro {
 
+		// Atributos
 		public $id;
 		public $titulo;
 		public $autor;
 		public $resumen;
 		public $copias;
+		public $tiempoLectura;
 		public $imagen;
 
-		//Constructor
-		public function Libro (int $id, string $titulo, string $autor, string $resumen, int $copias, $imagen) {
+		// Constructor
+		public function Libro (int $id, string $titulo, string $autor, string $resumen, int $copias, $tiempoLectura, $imagen) {
 			$this->id = $id;
 			$this->titulo = $titulo;
 			$this->autor = $autor;
 			$this->resumen = $resumen;
 			$this->copias = $copias;
+			$this->tiempoLectura = $tiempoLectura;
 			$this->imagen = $imagen;
 		}
 
-		public function setId(int $id) {
-			$this->id = $id;
-		}
-
+		// Getters
 		public function getId(){
 			return $this->id;
-		}
-
-		public function setTitulo(string $titulo) {
-			$this->titulo = $titulo;
 		}
 
 		public function getTitulo(){
 			return $this->titulo;
 		}
 
-		public function setAutor(string $autor) {
-			$this->autor = $autor;
-		}
-
 		public function getAutor(){
 			return $this->autor;
-		}
-
-		public function setResumen(string $resumen) {
-			$this->resumen = $resumen;
 		}
 
 		public function getResumen(){
 			return $this->resumen;
 		}
 
-		public function setCopias(string $copias) {
-			$this->copias = $copias;
-		}
-
 		public function getCopias(){
 			return $this->copias;
+		}
+
+		public function getTiempoLectura(){
+			return $this->tiempoLectura;
 		}
 
 		public function getImagen(){

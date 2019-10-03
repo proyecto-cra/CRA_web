@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ajustes</title>
+  <title>Ajustes</title>
 	<link rel="stylesheet" type="text/css" href="estilo.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -42,82 +42,73 @@
 			</span>
 		</div>
 	</nav>
-<?php
 
-    if (isset($_SESSION["id"])){
-        $id= $_SESSION["id"];
-        $listar=mysqli_query($cn, "SELECT * FROM usuarios WHERE id='$id'");
-        while ($rs=mysqli_fetch_assoc($listar)){
-            $nombre = $rs["nombre"];
-            $apellido = $rs["apellido"];
-            $fecha_nacimiento = $rs["fecha_nacimiento"];
-            $telefono = $rs["telefono"];
-            $contrasena = $rs["contrasena"];
+  <!-- Obtenemos los datos del usuario -->
+  <?php
+      if (isset($_SESSION["id"])){ // Comprobamos que la variable id no sean null (que no este vacia)
 
-        }
-        
-    }
-?>
-    <div class="content-wrapper">
-        <section class="content">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-tittle">Editar mi Perfil</h3>
-                        </div>
-                    <form role="form" method="post" action="#" enctype="multipart/form-data">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="ejemploinput">Nombre
-                                </label>
-                                <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="<?php echo $nombre;?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="ejemploinput">Apellido
-                                </label>
-                                <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="<?php echo $apellido;?>">
-                            </div>               
-                            <div class="form-group">
-                                <label for="ejemploinput">Teléfono
-                                </label>
-                                <input type="text" name="telefono" class="form-control" placeholder="telefono" value="<?php echo $telefono;?>">
-                            </div>       
-                            <div class="form-group">
-                                <label for="ejemploinput">Contraseña
-                                </label>
-                                <input type="text" name="contrasena" class="form-control" placeholder="contraseña" value="<?php echo $contrasena;?>">
-                            </div> 
-                        </div>
-                        <div class="box-footer">
-                            <button type="submit" name="Actualizar" class="btn btn-primary">Actualizar datos</button>
-                        </div>
-                    </form>
-                    </div>
-                <?php
+          $id= $_SESSION["id"]; // Si no esta null le asignamos el id del _SESSION a nuestro id
 
-                    print_r($_POST);
-                    if(isset($_POST['Actualizar'])){
-                        $nombre=mysqli_real_escape_string($cn, $_POST['nombre']);
-                         $apellido=mysqli_real_escape_string($cn, $_POST['apellido']);
-                         $telefono=mysqli_real_escape_string($cn, $_POST['telefono']);
-                         $contrasena=mysqli_real_escape_string($cn, $_POST['contrasena']);
-                    }
-                    $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellido',telefono='$telefono', contrasena='$contrasena' WHERE  id='$id'";
-                    $sql=mysqli_query($cn, $sql);
-                        
-                ?>
-                </div>
-                
+          $listar=mysqli_query($cn, "SELECT * FROM usuarios WHERE id='$id'"); // Obtenemos todos los datos del usuario en base al id
+
+          while ($rs=mysqli_fetch_assoc($listar)){ // Si recibe datos, asignamos los datos a las variables que creamos.
+
+              $nombre = $rs["nombre"];
+              $apellido = $rs["apellido"];
+              $telefono = $rs["telefono"];
+              $contrasena = $rs["contrasena"];
+
+          }
+          
+      }
+  ?>
+
+  <!-- 'Txt's -->
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <?php if ($_GET["e"] == 1 || $_GET["e"] == 2): ?>
+                <h3 class="box-tittle">Editar mi Perfil</h3>
+              <?php endif ?>
             </div>
-        
-        </section>
-    
-    </div>
 
-    <br>
+            <!-- Formulario -->
+            <form role="form" method="post" action="verificadorAjustes.php" enctype="multipart/form-data">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="ejemploinput">Nombre</label>
+                  <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="<?php echo $nombre;?>">
+                </div>
+                <div class="form-group">
+                  <label for="ejemploinput">Apellido</label>
+                  <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="<?php echo $apellido;?>">
+                </div>               
+                <div class="form-group">
+                  <label for="ejemploinput">Teléfono</label>
+                  <input type="text" name="telefono" class="form-control" placeholder="telefono" value="<?php echo $telefono;?>">
+                </div>       
+                <div class="form-group">
+                  <label for="ejemploinput">Contraseña</label>
+                  <input type="text" name="contrasena" class="form-control" placeholder="contraseña" value="<?php echo $contrasena;?>">
+                </div> 
+              </div>
+              <div class="box-footer">
+                <input type="submit" name="Actualizar" class="btn btn-primary">
+              </div>
+            </form>
 
+          </div>
+        </div>  
+      </div>
+    </section>
+  </div>
 
+  <br>
+
+  <!-- Footer -->
 	<footer class="page-footer font-small pt-4" style="color: #7daae6; background-color: #00091e; font-family: simplicity; font-size: 130%;">
 		<div class="container">
 			<img src="img/xd.png" style="width: 10%; height: 10%; margin-bottom:-18%; ">
@@ -149,5 +140,8 @@
 			<a href="https://www.lcdportales.cl/home/">  4to I / L.C.D.P </a>
 		</div>
 	</footer>
+  <?php if ($_GET["e"] == 2): ?>
+    <script type="text/javascript">alert("Cambios realizados exitosamente.");</script>
+  <?php endif ?>
 </body>
 </html>
