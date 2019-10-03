@@ -35,7 +35,7 @@
 				</li>
 				<?php if (isset($_SESSION['cargo']) == 1 || isset($_SESSION['cargo']) == 2): ?>
 				<li class="nav-item active">
-					<a class="nav-link" href="informes.html">Informes<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="informes.php">Informes<span class="sr-only">(current)</span></a>
 				</li>
 				<?php endif ?>
 			</ul>

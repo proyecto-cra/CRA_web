@@ -35,7 +35,7 @@
       <?php endif ?>
       <?php if (isset($_SESSION["rut"]) != ""): ?>
         <li class="nav-item active">
-          <a class="nav-link" targer="_self" href="libros.php">Libros</a>
+          <a class="nav-link" targer="_self" href="libros2.php">Libros</a>
         </li>
       <?php endif ?>
  
